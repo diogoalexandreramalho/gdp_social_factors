@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+<body onload="begin()">
+
+<div id="title">
+    <h1 id="title_text">EU GDP and its correlation with Social Indicators</h1>
+</div>
+
+<div id="catarina">
+    <h2 class="parallel_text">Social Indicators</h2>
+</div>
+
+<div id="map">
+    <h2 id="map-title">EU GDP per Country</h2>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Search</button>
+        <div id="myDropdown" class="dropdown-content">
+          <input type="text" placeholder="Search..." id="myInput" onkeyup="filterFunction()">
+          <a onclick="searchAdd('AT')">Austria</a>
+          <a onclick="searchAdd('BE')">Belgium</a>
+          <a onclick="searchAdd('BG')">Bulgaria</a>
+          <a onclick="searchAdd('CY')">Cyprus</a>
+          <a onclick="searchAdd('CZ')">Czech Republic</a>
+          <a onclick="searchAdd('DE')">Germany</a>
+          <a onclick="searchAdd('DK')">Denmark</a>
+          <a onclick="searchAdd('EE')">Estonia</a>
+          <a onclick="searchAdd('EL')">Greece</a>
+          <a onclick="searchAdd('ES')">Spain</a>
+          <a onclick="searchAdd('FI')">Finland</a>
+          <a onclick="searchAdd('FR')">France</a>
+          <a onclick="searchAdd('HR')">Croatia</a>
+          <a onclick="searchAdd('HU')">Hungary</a>
+          <a onclick="searchAdd('IE')">Ireland</a>
+          <a onclick="searchAdd('IT')">Italy</a>
+          <a onclick="searchAdd('LT')">Lithuania</a>
+          <a onclick="searchAdd('LU')">Luxembourg</a>
+          <a onclick="searchAdd('LV')">Latvia</a>
+          <a onclick="searchAdd('MT')">Malta</a>
+          <a onclick="searchAdd('NL')">Netherlands</a>
+          <a onclick="searchAdd('PL')">Poland</a>
+          <a onclick="searchAdd('PT')">Portugal</a>
+          <a onclick="searchAdd('SE')">Sweden</a>
+          <a onclick="searchAdd('SI')">Slovenia</a>
+          <a onclick="searchAdd('SK')">Slovakia</a>
+          <a onclick="searchAdd('UK')">United Kingdom</a>
+         
+        </div>
+    </div>
+    
+    <div id="legenda" style="visibility: hidden;">
+        <div id="flex">
+            <div id="cor" style="background-color: #154360;"></div>
+            <p id="info">>= 30K</p>
+        </div>
+        <div id="flex">
+            <div id="cor" style="background-color: #2471A3;"></div>
+            <p id="info">20K - 30K</p>
+        </div>
+        <div id="flex">
+            <div id="cor" style="background-color: #5499C7;"></div>
+            <p id="info">10K - 20K</p>
+        </div>
+        <div id="flex"> 
+            <div id="cor" style="background-color: #A9CCE3;"></div>
+            <p id="info">< 10K</p>
+        </div >
+    </div>
+    <div id="PP_legenda" style="visibility: hidden;">
+        <div id="flex">
+            <div id="cor" style="background-color: #f44336da;"></div>
+            <p id="info">Political Left</p>
+        </div>
+        <div id="flex">
+            <div id="cor" style="background-color: #2195f3c4;"></div>
+            <p id="info">Political Right</p>
+        </div>
+    </div>
+    <div class="slidecontainer">
+        <p class="slidecontainer-text">2008</p>
+        <input type="range" min="2008" max="2018" value="2008" class="slider" steps="1" id="myRange" oninput="handleYearSlider(this.value)">
+        <p class="slidecontainer-text">2018</p>
+    </div>
+    <div id="mapDiv"></div>
+</div>
+
+<div id="flexColorTab">
+    <div id = "flex">
+        <div id = "Gold"></div>
+        <p id = "GoldText"></p>
+    </div>
+    <div id = "flex">
+        <div id = "Yellowgreen"></div>
+        <p id = "YellowgreenText"></p>
+    </div>
+     <div id = "flex">
+        <div id = "Orange"></div>
+        <p id = "OrangeText"></p>
+    </div>
+      <div id = "flex">
+        <div id = "orchid"></div>
+        <p id = "orchidText"></p>
+    </div>
+</div>
+
+<div id="ano">
+    <p id="anoText">Selected Year</p>
+    <p id="anoYear" >2008</p>
+</div>
+
+<p id="buttonClear" onclick="clearHandler()">Reset</p>
+
+
+<div id="buttonPlay">
+<p id="textPlay" onclick="play()">Play 
+</p> 
+<div id="triangle-right" onclick="play()"></div>
+</div>
+
+
+<div id="line_chart">
+    <p id="buttonPP" onclick="PPHandler()">Political Party</p>
+    <h2 id="line_text">EU GDP Evolution per Year</h2>
+</div>
+
+<div id="unemployment">
+    <p id="buttonAge" onclick="ageUneHandler()">Age</p>
+    <p id="buttonEducation" onclick="educationUneHandler()">Education</p>
+    <h2 id="line_text">Unemployment</h2>
+    <div id="une_legenda">
+        <div id="flex">
+            <div id="circle" style="background-color: #000000;"></div>
+            <p id="une_info_circle">15-24</p>
+        </div>
+        <div id="flex">
+            <div id="square" style="background-color: #000000;"></div>
+            <p id="une_info_square">25-39</p>
+        </div>
+        <div id="flex">
+            <div id="triangle" style="background-color: #ffffff;"></div>
+            <p id="une_info_triangle">40-64</p>
+        </div>
+    </div>
+</div>  
+
+<div id="criminality">
+    <h2 id="line_text">Criminality</h2>
+    <div id="cri_legenda">
+        <div id="flex">
+            <div id="cor" style="background-color: #000000;"></div>
+            <p id="info">Poor areas</p>
+        </div>
+        <div id="flex">
+            <div id="cor" style="background-color: #ffffff;"></div>
+            <p id="info">Rich areas</p>
+        </div>
+    </div>
+</div>    
+
+
+
+
+<script src="https://d3js.org/d3-array.v2.min.js"></script>
+<script src="https://d3js.org/d3-geo.v2.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script src="main.js"></script>
+
+
+</body>
+</html>
