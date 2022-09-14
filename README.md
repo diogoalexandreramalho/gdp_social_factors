@@ -3,6 +3,10 @@
 ## About The Project
 This repository includes the code for a web application that provides a visual interpretation of GDP and its correlation with three social factors: criminality, unemployment and emigration.
 
+Inside the directory **code**, you can find the code scripts. 
+
+In the **report.pdf** file you can find the description of motivations, data, decisions, results and conclusions.
+
 ### Built with
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [HTML5](https://www.w3.org/html/)
